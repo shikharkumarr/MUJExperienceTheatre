@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,15 +29,16 @@ import java.util.Locale;
 
 public class ChooseSessionActivity extends AppCompatActivity {
 
-    TextView tvTime1, tvTime2, tvBack, tvDate,tvseats1;
+    TextView tvTime1, tvTime2, tvBack, tvDate, tvseats1;
     ConstraintLayout seatsavailableLayout, choosetimeLayout;
     ImageView imTime1, imTime2;
     Button button;
-    String Time;
+    String Date, Time;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    boolean result = false;
-    String x,y;
+    int result = 0;
+    String x, y;
+    Date today, maxDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
                         int seats = Integer.parseInt(snapshot.child(x).getValue().toString());
                         seats--;
-                        myRef.child("SeatAvailable").child(x).setValue(""+seats);
+                        myRef.child("SeatAvailable").child(x).setValue("" + seats);
                     }
 
                     @Override
@@ -77,8 +79,8 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
                 String Date = tvDate.getText().toString();
                 Intent intent = new Intent(ChooseSessionActivity.this, LoginActivity.class);
-                intent.putExtra("Date",Date);
-                intent.putExtra("Time",Time);
+                intent.putExtra("Date", Date);
+                intent.putExtra("Time", Time);
                 startActivity(intent);
             }
         });
@@ -99,7 +101,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setTimeAlpha1();
                 Time = "11:00";
-                y="A";
+                y = "A";
                 seatsavailableLayout.setVisibility(View.VISIBLE);
                 tvseats1.setText("Loading...");
                 getSeats();
@@ -111,7 +113,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setTimeAlpha2();
                 Time = "03:00";
-                y="B";
+                y = "B";
                 seatsavailableLayout.setVisibility(View.VISIBLE);
                 tvseats1.setText("Loading...");
                 getSeats();
@@ -125,34 +127,33 @@ public class ChooseSessionActivity extends AppCompatActivity {
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                today = calendar.getTime();
+                calendar.add(Calendar.DATE, 40);
+                maxDate = calendar.getTime();
+
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         ChooseSessionActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                                tvDate.setText(day + " / " + (month + 1) + " / " + (year));
+                                Date = tvDate.getText().toString();
+                                x = "" + day + " " + (month + 1) + " " + year;
+
                                 choosetimeLayout.setVisibility(View.VISIBLE);
                                 seatsavailableLayout.setVisibility(View.GONE);
                                 setTimeAlpha0();
 
-                                tvDate.setText(day + " / " + (month + 1) +" / "+ (year) );
-                                x = ""+day +" " +(month + 1)+" "+year;
-                                //compare x and currentDate
-                                result = DateComparator.compareDates(x, currentDate);
-                                if (result == false){
-                                    Toast.makeText(ChooseSessionActivity.this, "false", Toast.LENGTH_SHORT).show();
-                                }
-                                else if (result == true){
-                                    Toast.makeText(ChooseSessionActivity.this, "true", Toast.LENGTH_SHORT).show();
-                                }
-
                             }
                         }, year, month, dayOfMonth);
+                datePickerDialog.getDatePicker().setMinDate(today.getTime());
+                datePickerDialog.getDatePicker().setMaxDate(maxDate.getTime());
                 datePickerDialog.show();
             }
         });
     }
-
 
 
     public void setTimeAlpha0() {
@@ -160,8 +161,9 @@ public class ChooseSessionActivity extends AppCompatActivity {
         imTime1.setAlpha(0.35f);
         tvTime2.setAlpha(0.35f);
         imTime2.setAlpha(0.35f);
-        y=null;
+        y = null;
     }
+
     public void setTimeAlpha1() {
         tvTime1.setAlpha(1.0f);
         imTime1.setAlpha(1.0f);
@@ -178,14 +180,13 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
 
     public void getSeats() {
-        String z = x+" "+y;
+        String z = x + " " + y;
         myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                if (snapshot.hasChild(""+z)) {
-                    tvseats1.setText(snapshot.child(z).getValue().toString()+" of 15");
-                }
-                else {
+                if (snapshot.hasChild("" + z)) {
+                    tvseats1.setText(snapshot.child(z).getValue().toString() + " of 15");
+                } else {
                     myRef.child("SeatAvailable").child(z).setValue(15);
                     tvseats1.setText("15 of 15");
                 }
