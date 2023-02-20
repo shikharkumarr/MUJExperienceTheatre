@@ -91,81 +91,102 @@
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:layout_constraintVertical_bias="0.22" />
 
-
-    <TextView
-        android:id="@+id/textView9"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/choosetimeLayout"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/centurygothic"
-        android:paddingHorizontal="20dp"
-        android:text="Choose Time"
-        android:textColor="@color/white"
-        android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:text="Show Duration : 15 mins"
-        android:textColor="#6D6D80"
-        android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/centurygothic"
+            android:paddingHorizontal="20dp"
+            android:text="Choose Time"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imtime1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/timebg"
-        android:layout_marginTop="20dp"
-        android:alpha="0.35"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:text="Show Duration : 15 mins"
+            android:textColor="#6D6D80"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-    <ImageView
-        android:id="@+id/imtime2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/timebg"
-        android:visibility=""
-        android:layout_marginTop="20dp"
-        android:alpha="0.35"
-        app:layout_constraintStart_toEndOf="@id/imtime1"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        <ImageView
+            android:id="@+id/imtime1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/timebg"
+            android:layout_marginTop="20dp"
+            android:alpha="0.35"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-    <TextView
-        android:id="@+id/tvtime1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:fontFamily="@font/centurygothic"
-        android:text="11:00 - 11:15 AM"
-        android:alpha="0.35"
-        app:layout_constraintVertical_bias="0.10"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imtime1"
-        app:layout_constraintEnd_toEndOf="@+id/imtime1"
-        app:layout_constraintStart_toStartOf="@+id/imtime1"
-        app:layout_constraintTop_toTopOf="@+id/imtime1" />
+        <ImageView
+            android:id="@+id/imtime2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/timebg"
+            android:layout_marginTop="20dp"
+            android:alpha="0.35"
+            app:layout_constraintStart_toEndOf="@id/imtime1"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-    <TextView
-        android:id="@+id/tvtime2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/centurygothic"
-        android:padding="10dp"
-        android:text="03:00 - 03:15 PM"
-        android:alpha="0.35"
-        app:layout_constraintVertical_bias="0.10"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imtime2"
-        app:layout_constraintEnd_toEndOf="@+id/imtime2"
-        app:layout_constraintStart_toStartOf="@+id/imtime2"
-        app:layout_constraintTop_toTopOf="@+id/imtime2" />
+        <TextView
+            android:id="@+id/tvtime1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:fontFamily="@font/centurygothic"
+            android:text="11:00 - 11:15 AM"
+            android:alpha="0.35"
+            app:layout_constraintVertical_bias="0.10"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/imtime1"
+            app:layout_constraintEnd_toEndOf="@+id/imtime1"
+            app:layout_constraintStart_toStartOf="@+id/imtime1"
+            app:layout_constraintTop_toTopOf="@+id/imtime1" />
+
+        <TextView
+            android:id="@+id/tvtime2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/centurygothic"
+            android:padding="10dp"
+            android:text="03:00 - 03:15 PM"
+            android:alpha="0.35"
+            app:layout_constraintVertical_bias="0.10"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/imtime2"
+            app:layout_constraintEnd_toEndOf="@+id/imtime2"
+            app:layout_constraintStart_toStartOf="@+id/imtime2"
+            app:layout_constraintTop_toTopOf="@+id/imtime2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/seatsavailableLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/choosetimeLayout">
 
     <TextView
         android:id="@+id/textView12"
@@ -173,20 +194,18 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/centurygothic"
         android:paddingHorizontal="20dp"
-        android:visibility="gone"
         android:text="Seats Available"
         android:textColor="@color/white"
         android:textSize="15dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imtime1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imseats"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.35"
-        android:visibility="gone"
         android:background="@drawable/timebg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -197,15 +216,22 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:fontFamily="@font/centurygothic"
-        android:text="15 of 15"
-        android:visibility="gone"
-        android:alpha="0.35"
+        android:text="Loading..."
         app:layout_constraintVertical_bias="0.10"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/imseats"
         app:layout_constraintEnd_toEndOf="@+id/imseats"
         app:layout_constraintStart_toStartOf="@+id/imseats"
         app:layout_constraintTop_toTopOf="@+id/imseats" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
 
     <Button
         android:id="@+id/button"

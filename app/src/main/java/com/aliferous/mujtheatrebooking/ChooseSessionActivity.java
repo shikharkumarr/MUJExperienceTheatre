@@ -2,6 +2,7 @@ package com.aliferous.mujtheatrebooking;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -27,8 +28,9 @@ import java.util.Locale;
 
 public class ChooseSessionActivity extends AppCompatActivity {
 
-    TextView tvTime1, tvTime2, tvBack, tvDate,tvseats1,tvseatsheading;
-    ImageView imTime1, imTime2, imseats;
+    TextView tvTime1, tvTime2, tvBack, tvDate,tvseats1;
+    ConstraintLayout seatsavailableLayout, choosetimeLayout;
+    ImageView imTime1, imTime2;
     Button button;
     String Time;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -45,12 +47,12 @@ public class ChooseSessionActivity extends AppCompatActivity {
         tvTime2 = findViewById(R.id.tvtime2);
         imTime1 = findViewById(R.id.imtime1);
         imTime2 = findViewById(R.id.imtime2);
+        tvseats1 = findViewById(R.id.tvseats1);
         tvBack = findViewById(R.id.tvBack);
         tvDate = findViewById(R.id.tvDate);
         button = findViewById(R.id.button);
-        imseats = findViewById(R.id.imseats);
-        tvseats1 = findViewById(R.id.tvseats1);
-        tvseatsheading = findViewById(R.id.textView12);
+        seatsavailableLayout = findViewById(R.id.seatsavailableLayout);
+        choosetimeLayout = findViewById(R.id.choosetimeLayout);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,24 +97,24 @@ public class ChooseSessionActivity extends AppCompatActivity {
         tvTime1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvTime1.setAlpha(1.0f);
-                imTime1.setAlpha(1.0f);
-                tvTime2.setAlpha(0.35f);
-                imTime2.setAlpha(0.35f);
+                setTimeAlpha1();
                 Time = "11:00";
-                y="1";
+                y="A";
+                seatsavailableLayout.setVisibility(View.VISIBLE);
+                tvseats1.setText("Loading...");
+                getSeats();
             }
         });
 
         tvTime2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvTime2.setAlpha(1.0f);
-                imTime2.setAlpha(1.0f);
-                tvTime1.setAlpha(0.35f);
-                imTime1.setAlpha(0.35f);
-                Time = "15:00";
-                y="2";
+                setTimeAlpha2();
+                Time = "03:00";
+                y="B";
+                seatsavailableLayout.setVisibility(View.VISIBLE);
+                tvseats1.setText("Loading...");
+                getSeats();
             }
         });
 
@@ -129,45 +131,72 @@ public class ChooseSessionActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                choosetimeLayout.setVisibility(View.VISIBLE);
+                                seatsavailableLayout.setVisibility(View.GONE);
+                                setTimeAlpha0();
+
                                 tvDate.setText(day + " / " + (month + 1) +" / "+ (year) );
                                 x = ""+day +" " +(month + 1)+" "+year;
                                 //compare x and currentDate
                                 result = DateComparator.compareDates(x, currentDate);
-                                if (result == 0){
-                                    Toast.makeText(ChooseSessionActivity.this, "Book", Toast.LENGTH_SHORT).show();
-                                }
-                                else if (result == 1){
-                                    Toast.makeText(ChooseSessionActivity.this, "Earlier Date", Toast.LENGTH_SHORT).show();
-                                }
-                                else if (result == 2){
-                                    Toast.makeText(ChooseSessionActivity.this, "40 Days", Toast.LENGTH_SHORT).show();
-                                }
+//                                if (result == 0){
+//                                    Toast.makeText(ChooseSessionActivity.this, "Book", Toast.LENGTH_SHORT).show();
+//                                }
+//                                else if (result == 1){
+//                                    Toast.makeText(ChooseSessionActivity.this, "Earlier Date", Toast.LENGTH_SHORT).show();
+//                                }
+//                                else if (result == 2){
+//                                    Toast.makeText(ChooseSessionActivity.this, "40 Days", Toast.LENGTH_SHORT).show();
+//                                }
 
-
-
-                                //if result is true only then
-                                tvseatsheading.setVisibility(View.VISIBLE);
-                                tvseats1.setVisibility(View.VISIBLE);
-                                imseats.setVisibility(View.VISIBLE);
-                                myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot snapshot) {
-                                        if (snapshot.hasChild(""+x)) {
-                                            tvseats1.setText(snapshot.child(x).getValue().toString()+" of 15");
-                                        }
-                                        else {
-                                            myRef.child("SeatAvailable").child(x).setValue(15);
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
                             }
                         }, year, month, dayOfMonth);
                 datePickerDialog.show();
+            }
+        });
+    }
+
+
+
+    public void setTimeAlpha0() {
+        tvTime1.setAlpha(0.35f);
+        imTime1.setAlpha(0.35f);
+        tvTime2.setAlpha(0.35f);
+        imTime2.setAlpha(0.35f);
+        y=null;
+    }
+    public void setTimeAlpha1() {
+        tvTime1.setAlpha(1.0f);
+        imTime1.setAlpha(1.0f);
+        tvTime2.setAlpha(0.35f);
+        imTime2.setAlpha(0.35f);
+    }
+
+    public void setTimeAlpha2() {
+        tvTime2.setAlpha(1.0f);
+        imTime2.setAlpha(1.0f);
+        tvTime1.setAlpha(0.35f);
+        imTime1.setAlpha(0.35f);
+    }
+
+
+    public void getSeats() {
+        String z = x+" "+y;
+        myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.hasChild(""+z)) {
+                    tvseats1.setText(snapshot.child(z).getValue().toString()+" of 15");
+                }
+                else {
+                    myRef.child("SeatAvailable").child(z).setValue(15);
+                    tvseats1.setText("15 of 15");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
