@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +33,8 @@ public class ChooseSessionActivity extends AppCompatActivity {
     String Time;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
+    int result = 0;
+    String x,y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,24 @@ public class ChooseSessionActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //reduce one seat
+                myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+
+                        int seats = Integer.parseInt(snapshot.child(x).getValue().toString());
+                        seats--;
+                        myRef.child("SeatAvailable").child(x).setValue(""+seats);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
                 String Date = tvDate.getText().toString();
                 Intent intent = new Intent(ChooseSessionActivity.this, LoginActivity.class);
                 intent.putExtra("Date",Date);
@@ -60,8 +81,8 @@ public class ChooseSessionActivity extends AppCompatActivity {
             }
         });
 
-        String date = new SimpleDateFormat("dd / MM", Locale.getDefault()).format(new Date());
-        tvDate.setText(date);
+        String currentDate = new SimpleDateFormat("dd / MM / yyyy", Locale.getDefault()).format(new Date());
+        tvDate.setText(currentDate);
 
         tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +100,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
                 tvTime2.setAlpha(0.35f);
                 imTime2.setAlpha(0.35f);
                 Time = "11:00";
+                y="1";
             }
         });
 
@@ -90,6 +112,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
                 tvTime1.setAlpha(0.35f);
                 imTime1.setAlpha(0.35f);
                 Time = "15:00";
+                y="2";
             }
         });
 
@@ -106,8 +129,23 @@ public class ChooseSessionActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                                tvDate.setText(day + " / " + (month + 1) );
-                                String x = ""+day +"" +(month + 1)+"";
+                                tvDate.setText(day + " / " + (month + 1) +" / "+ (year) );
+                                x = ""+day +" " +(month + 1)+" "+year;
+                                //compare x and currentDate
+                                result = DateComparator.compareDates(x, currentDate);
+                                if (result == 0){
+                                    Toast.makeText(ChooseSessionActivity.this, "Book", Toast.LENGTH_SHORT).show();
+                                }
+                                else if (result == 1){
+                                    Toast.makeText(ChooseSessionActivity.this, "Earlier Date", Toast.LENGTH_SHORT).show();
+                                }
+                                else if (result == 2){
+                                    Toast.makeText(ChooseSessionActivity.this, "40 Days", Toast.LENGTH_SHORT).show();
+                                }
+
+
+
+                                //if result is true only then
                                 tvseatsheading.setVisibility(View.VISIBLE);
                                 tvseats1.setVisibility(View.VISIBLE);
                                 imseats.setVisibility(View.VISIBLE);
@@ -118,8 +156,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
                                             tvseats1.setText(snapshot.child(x).getValue().toString()+" of 15");
                                         }
                                         else {
-                                            myRef = myRef.child("SeatAvailable");
-                                            myRef.child(x).setValue(15);
+                                            myRef.child("SeatAvailable").child(x).setValue(15);
                                         }
                                     }
 

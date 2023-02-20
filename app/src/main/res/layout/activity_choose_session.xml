@@ -91,6 +91,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:layout_constraintVertical_bias="0.22" />
 
+
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
@@ -130,6 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/timebg"
+        android:visibility=""
         android:layout_marginTop="20dp"
         android:alpha="0.35"
         app:layout_constraintStart_toEndOf="@id/imtime1"
