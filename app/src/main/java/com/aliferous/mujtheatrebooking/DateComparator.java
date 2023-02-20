@@ -1,18 +1,15 @@
 package com.aliferous.mujtheatrebooking;
 
-import android.widget.Toast;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateComparator {
 
-    public static int compareDates(String dateString1, String dateString2) {
-        SimpleDateFormat format = new SimpleDateFormat("dd / MM / yyyy");
-        int a = 0;
-
+    public static boolean compareDates(String dateString1, String dateString2) {
+        SimpleDateFormat format = new SimpleDateFormat("dd / MM / yyyy", Locale.ENGLISH);
         try {
             Date date1 = format.parse(dateString1);
             Date date2 = format.parse(dateString2);
@@ -25,15 +22,17 @@ public class DateComparator {
             long diff = cal2.getTimeInMillis() - cal1.getTimeInMillis();
             long days = diff / (24 * 60 * 60 * 1000);
 
-            if (date1.before(date2)) {
-                a = 1;
+            if (days > 40 || date1.before(date2)) {
+                return false;
             }
-            else if (days > 40){
-                a = 2;
-            }
+            return true;
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
-        return a;
+        return true;
     }
 }

@@ -35,7 +35,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
     String Time;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    int result = 0;
+    boolean result = false;
     String x,y;
 
     @Override
@@ -139,15 +139,12 @@ public class ChooseSessionActivity extends AppCompatActivity {
                                 x = ""+day +" " +(month + 1)+" "+year;
                                 //compare x and currentDate
                                 result = DateComparator.compareDates(x, currentDate);
-//                                if (result == 0){
-//                                    Toast.makeText(ChooseSessionActivity.this, "Book", Toast.LENGTH_SHORT).show();
-//                                }
-//                                else if (result == 1){
-//                                    Toast.makeText(ChooseSessionActivity.this, "Earlier Date", Toast.LENGTH_SHORT).show();
-//                                }
-//                                else if (result == 2){
-//                                    Toast.makeText(ChooseSessionActivity.this, "40 Days", Toast.LENGTH_SHORT).show();
-//                                }
+                                if (result == false){
+                                    Toast.makeText(ChooseSessionActivity.this, "false", Toast.LENGTH_SHORT).show();
+                                }
+                                else if (result == true){
+                                    Toast.makeText(ChooseSessionActivity.this, "true", Toast.LENGTH_SHORT).show();
+                                }
 
                             }
                         }, year, month, dayOfMonth);
