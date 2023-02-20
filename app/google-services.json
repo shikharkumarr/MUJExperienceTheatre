@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "322095577275",
+    "firebase_url": "https://muj-experience-theatre-default-rtdb.firebaseio.com",
+    "project_id": "muj-experience-theatre",
+    "storage_bucket": "muj-experience-theatre.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322095577275:android:5a7e3b2b8142504a32119e",
+        "android_client_info": {
+          "package_name": "com.aliferous.experiencetheater"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322095577275-ukrmum6e5cs9tjd3e265p7mp2f6rj2bt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOUkkiijVxo5WoYx9yPeeMJxYMGbx2Pes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322095577275-ukrmum6e5cs9tjd3e265p7mp2f6rj2bt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322095577275:android:2f24030cd2b097d332119e",
+        "android_client_info": {
+          "package_name": "com.aliferous.mujapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322095577275-ukrmum6e5cs9tjd3e265p7mp2f6rj2bt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOUkkiijVxo5WoYx9yPeeMJxYMGbx2Pes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322095577275-ukrmum6e5cs9tjd3e265p7mp2f6rj2bt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322095577275:android:874affa26ca2f38232119e",
+        "android_client_info": {
+          "package_name": "com.aliferous.mujtheatrebooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322095577275-ukrmum6e5cs9tjd3e265p7mp2f6rj2bt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOUkkiijVxo5WoYx9yPeeMJxYMGbx2Pes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322095577275-ukrmum6e5cs9tjd3e265p7mp2f6rj2bt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

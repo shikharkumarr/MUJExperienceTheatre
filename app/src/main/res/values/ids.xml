@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvtime2" type="id" />
+    <item name="tvtime1" type="id" />
+    <item name="imtime2" type="id" />
+    <item name="imtime1" type="id" />
+    <item name="textView11" type="id" />
+    <item name="textView9" type="id" />
+    <item name="textView12" type="id" />
+    <item name="imageView4" type="id" />
+    <item name="textView8" type="id" />
+    <item name="imageView2" type="id" />
+    <item name="textView7" type="id" />
+</resources>
