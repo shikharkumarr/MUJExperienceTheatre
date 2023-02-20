@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:app="http://schemas.android.com/apk/res-auto" 
+    android:orientation="vertical"
+    android:background="@drawable/ticketbg1"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_marginTop="20dp">
+
+
+    <TextView
+        android:id="@+id/item_tv_booking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:text="Booking ID : "
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20" />
+
+    <TextView
+        android:id="@+id/item_booking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:text="loading"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_tv_booking"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20" />
+
+    <TextView
+        android:id="@+id/item_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:text="Name : "
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_tv_booking"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:text="loading"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/item_tv_name"
+        app:layout_constraintTop_toTopOf="@id/item_tv_name"/>
+
+
+    <TextView
+        android:id="@+id/item_tv_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:text="Date &amp; Time : "
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="@+id/item_tv_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.60" />
+
+    <TextView
+        android:id="@+id/item_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/centurygothic"
+        android:text="loading"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/item_tv_datetime"
+        app:layout_constraintTop_toTopOf="@id/item_tv_datetime"/>
+
+<Button
+    android:id="@+id/item_delete"
+    android:layout_width="25dp"
+    android:layout_height="25dp"
+    android:fontFamily="@font/centurygothic"
+    android:textSize="11dp"
+    app:backgroundTint="@null"
+    android:background="@drawable/trash"
+    app:layout_constraintVertical_bias="0.65"
+    app:layout_constraintHorizontal_bias="0.90"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

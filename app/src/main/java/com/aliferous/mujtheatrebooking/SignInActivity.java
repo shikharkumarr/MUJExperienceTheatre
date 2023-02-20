@@ -29,6 +29,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class SignInActivity extends AppCompatActivity {
@@ -41,6 +42,7 @@ public class SignInActivity extends AppCompatActivity {
     String codeSent, codeEntered;
 
     FirebaseUser firebaseUser;
+    DatabaseReference reference;
 
     @Override
     protected void onStart() {
@@ -117,8 +119,25 @@ public class SignInActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //CORRECT OTP AND LOGIN
                             FirebaseUser user = task.getResult().getUser();
-                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                            startActivity(intent);
+
+                            assert firebaseUser != null;
+                            String userid = firebaseUser.getUid();
+
+                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("id", userid);
+                            reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+                            });
+
+
                         }
                         else {
                             Toast.makeText(getApplicationContext(),"Incorrect OTP",Toast.LENGTH_SHORT).show();
