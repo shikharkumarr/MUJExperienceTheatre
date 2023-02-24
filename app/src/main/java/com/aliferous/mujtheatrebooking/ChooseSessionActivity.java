@@ -37,7 +37,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     int result = 0;
-    String x, y;
+    String x, y , z;
     Date today, maxDate;
 
     @Override
@@ -67,9 +67,9 @@ public class ChooseSessionActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
 
-                        int seats = Integer.parseInt(snapshot.child(x).getValue().toString());
+                        int seats = Integer.parseInt(snapshot.child(z).getValue().toString());
                         seats--;
-                        myRef.child("SeatAvailable").child(x).setValue("" + seats);
+                        myRef.child("SeatAvailable").child(z).setValue("" + seats);
                     }
 
                     @Override
@@ -192,7 +192,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
 
     public void getSeats() {
-        String z = x + " " + y;
+        z = x + " " + y;
         myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
