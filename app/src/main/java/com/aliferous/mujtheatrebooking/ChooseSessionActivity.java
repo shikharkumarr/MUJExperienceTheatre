@@ -56,6 +56,8 @@ public class ChooseSessionActivity extends AppCompatActivity {
         seatsavailableLayout = findViewById(R.id.seatsavailableLayout);
         choosetimeLayout = findViewById(R.id.choosetimeLayout);
 
+        DisableButton();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +107,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
                 seatsavailableLayout.setVisibility(View.VISIBLE);
                 tvseats1.setText("Loading...");
                 getSeats();
+
             }
         });
 
@@ -145,6 +148,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
                                 choosetimeLayout.setVisibility(View.VISIBLE);
                                 seatsavailableLayout.setVisibility(View.GONE);
                                 setTimeAlpha0();
+                                DisableButton();
 
                             }
                         }, year, month, dayOfMonth);
@@ -155,6 +159,14 @@ public class ChooseSessionActivity extends AppCompatActivity {
         });
     }
 
+    public void DisableButton() {
+        button.setAlpha(0.4f);
+        button.setEnabled(false);
+    }
+    public void EnableButton() {
+        button.setAlpha(1f);
+        button.setEnabled(true);
+    }
 
     public void setTimeAlpha0() {
         tvTime1.setAlpha(0.35f);
@@ -184,12 +196,23 @@ public class ChooseSessionActivity extends AppCompatActivity {
         myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                String noOfSeats;
                 if (snapshot.hasChild("" + z)) {
                     tvseats1.setText(snapshot.child(z).getValue().toString() + " of 15");
+                    noOfSeats = snapshot.child(z).getValue().toString();
                 } else {
                     myRef.child("SeatAvailable").child(z).setValue(15);
                     tvseats1.setText("15 of 15");
+                    noOfSeats = "15";
                 }
+
+                if (noOfSeats.equals("0")){
+                    DisableButton();
+                }
+                else{
+                    EnableButton();
+                }
+
             }
 
             @Override
