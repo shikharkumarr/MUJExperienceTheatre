@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,13 +27,17 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvBack;
     EditText etName, etEmail, etReg;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
+    DatabaseReference myRef = database.getReference() , bookingref = FirebaseDatabase.getInstance().getReference("Users");
+
+    FirebaseUser firebaseUser;
     String name, email, reg, Date, Time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         button = findViewById(R.id.button);
         tvBack = findViewById(R.id.tvBack);
@@ -85,11 +91,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
                     myRef = myRef.child("Bookings").child(""+BookingID);
+                    myRef.child("Id").setValue(""+BookingID);
                     myRef.child("Name").setValue(name);
                     myRef.child("Email").setValue(email);
                     myRef.child("Registration No").setValue(reg);
                     myRef.child("Date").setValue(Date);
                     myRef.child("Time").setValue(Time);
+
+                    bookingref.child(firebaseUser.getUid()).child("Bookings").child(""+BookingID).child("Id").setValue(""+BookingID);
+
 
                     Intent intent = new Intent(LoginActivity.this, ShowTicketActivity.class);
                     intent.putExtra("BookingID", BookingID);
