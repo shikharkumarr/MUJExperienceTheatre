@@ -18,10 +18,13 @@
         android:theme="@style/Theme.MUJExperienceTheatre"
         tools:targetApi="31">
         <activity
+            android:name=".ImageViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewTicketsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ChooseSessionActivity"
             android:exported="false" />
         <activity
             android:name=".ShowTicketActivity"
@@ -30,10 +33,10 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ChooseSessionActivity"
+            android:name=".SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
