@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aliferous.mujtheatrebooking.R;
@@ -71,9 +72,25 @@ public class Ticket_Adapter extends RecyclerView.Adapter<Ticket_Adapter.ViewHold
         holder.ticket_name.setText(ticket_item.getName());
         holder.ticket_datetime.setText(DateTime);
 
-
-
         holder.ticket_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.ticket_layout_main.setVisibility(View.GONE);
+                holder.ticket_layout_delete.setVisibility(View.VISIBLE);
+            }
+        });
+
+        holder.ticket_nodelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.ticket_layout_main.setVisibility(View.VISIBLE);
+                holder.ticket_layout_delete.setVisibility(View.GONE);
+            }
+        });
+
+
+
+        holder.ticket_yesdelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -84,18 +101,13 @@ public class Ticket_Adapter extends RecyclerView.Adapter<Ticket_Adapter.ViewHold
                         int noORequests = (int) dataSnapshot.getChildrenCount();
                         String id = ticket_item.getId();
 
-                        for (int i=1;i<=300;i++){
-                            if (dataSnapshot.hasChild(""+i)){
-                                String checkID = dataSnapshot.child(""+i).child("Id").getValue().toString();
+                            if (dataSnapshot.hasChild(""+id)){
+                                String checkID = dataSnapshot.child(""+id).child("Id").getValue().toString();
                                 if (checkID.equals(id)){
-                                    reference.child(""+i).child("Id").removeValue();
+                                    reference.child(""+id).child("Id").removeValue();
                                     mUsers.clear();
                                 }
                             }
-
-
-                        }
-
 
 
                     }
@@ -115,8 +127,10 @@ public class Ticket_Adapter extends RecyclerView.Adapter<Ticket_Adapter.ViewHold
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView ticket_bookingid,ticket_name,ticket_datetime;
-        public Button ticket_delete;
+        public TextView ticket_bookingid,ticket_name,ticket_datetime, ticket_deletetv;
+        public Button ticket_delete,ticket_yesdelete,ticket_nodelete;
+
+        public ConstraintLayout ticket_layout_main, ticket_layout_delete;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -126,6 +140,12 @@ public class Ticket_Adapter extends RecyclerView.Adapter<Ticket_Adapter.ViewHold
             ticket_name = itemView.findViewById(R.id.item_name);
             ticket_datetime = itemView.findViewById(R.id.item_datetime);
             ticket_delete = itemView.findViewById(R.id.item_delete);
+            ticket_deletetv = itemView.findViewById(R.id.item_tv_suredelete);
+            ticket_nodelete = itemView.findViewById(R.id.item_tv_nodelete);
+            ticket_yesdelete = itemView.findViewById(R.id.item_tv_yesdelete);
+
+            ticket_layout_delete = itemView.findViewById(R.id.item_constraint_delete);
+            ticket_layout_main = itemView.findViewById(R.id.item_constraint_main);
 
 
         }
