@@ -26,10 +26,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class ChooseSessionActivity extends AppCompatActivity {
 
-    TextView tvTime1, tvTime2, tvBack, tvDate, tvseats1;
+    TextView tvTime1, tvTime2, tvBack, tvDate, tvseats1, noshow;
     ConstraintLayout seatsavailableLayout, choosetimeLayout;
     ImageView imTime1, imTime2;
     Button button;
@@ -40,6 +41,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
     String x, y , z;
     Date today, maxDate;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
         tvTime1 = findViewById(R.id.tvtime1);
         tvTime2 = findViewById(R.id.tvtime2);
+        noshow = findViewById(R.id.tvnoshow);
         imTime1 = findViewById(R.id.imtime1);
         imTime2 = findViewById(R.id.imtime2);
         tvseats1 = findViewById(R.id.tvseats1);
@@ -57,6 +60,8 @@ public class ChooseSessionActivity extends AppCompatActivity {
         choosetimeLayout = findViewById(R.id.choosetimeLayout);
 
         DisableButton();
+
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,13 +106,12 @@ public class ChooseSessionActivity extends AppCompatActivity {
         tvTime1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimeAlpha1();
-                Time = "11:00";
-                y = "A";
-                seatsavailableLayout.setVisibility(View.VISIBLE);
-                tvseats1.setText("Loading...");
-                getSeats();
-
+                    setTimeAlpha1();
+                    Time = "11:00";
+                    y = "A";
+                    seatsavailableLayout.setVisibility(View.VISIBLE);
+                    tvseats1.setText("Loading...");
+                    getSeats();
             }
         });
 
@@ -147,14 +151,55 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
                                 choosetimeLayout.setVisibility(View.VISIBLE);
                                 seatsavailableLayout.setVisibility(View.GONE);
+
+
+                                Calendar todayCalendar = Calendar.getInstance();
+                                int todayYear = todayCalendar.get(Calendar.YEAR);
+                                int todayMonth = todayCalendar.get(Calendar.MONTH);
+                                int todayDay = todayCalendar.get(Calendar.DAY_OF_MONTH);
+
+                                y = "" + todayDay + " " + (todayMonth+1) + " " + todayYear;
+
+
+
+// Compare the dates
+                                if (x.equals(y)) {
+                                    int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                                    boolean test = checktimings(currentHour,10);
+                                    if (!test){
+                                        Toast.makeText(ChooseSessionActivity.this, "1st time", Toast.LENGTH_SHORT).show();
+                                        tvTime1.setVisibility(View.GONE);
+                                        imTime1.setVisibility(View.GONE);
+                                    }
+
+                                    test = checktimings(currentHour,14);
+                                    if (!test){
+                                        tvTime2.setVisibility(View.GONE);
+                                        imTime2.setVisibility(View.GONE);
+                                        noshow.setVisibility(View.VISIBLE);
+
+                                    }
+                                }
+                                else{
+                                    tvTime1.setVisibility(View.VISIBLE);
+                                    imTime1.setVisibility(View.VISIBLE);
+                                    tvTime2.setVisibility(View.VISIBLE);
+                                    imTime2.setVisibility(View.VISIBLE);
+                                    noshow.setVisibility(View.GONE);
+                                }
+
                                 setTimeAlpha0();
                                 DisableButton();
+
+
 
                             }
                         }, year, month, dayOfMonth);
                 datePickerDialog.getDatePicker().setMinDate(today.getTime());
                 datePickerDialog.getDatePicker().setMaxDate(maxDate.getTime());
                 datePickerDialog.show();
+
+
             }
         });
     }
@@ -220,5 +265,16 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private boolean checktimings(int time, int endtime) {
+
+
+        if(time<endtime) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
