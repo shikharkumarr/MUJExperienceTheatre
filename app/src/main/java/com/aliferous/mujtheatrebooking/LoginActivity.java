@@ -81,6 +81,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LoginActivity.this, ChooseSessionActivity.class);
+        startActivity(intent);
+    }
+
     public void createOnFirebase() {
         final int BookingID = new Random().nextInt(900000) + 100000;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -97,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                     myRef.child("Registration No").setValue(reg);
                     myRef.child("Date").setValue(Date);
                     myRef.child("Time").setValue(Time);
-                    
+
                     bookingref.child(firebaseUser.getUid()).child("Bookings").child(""+BookingID).child("Id").setValue(""+BookingID);
 
 
