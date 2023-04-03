@@ -1,5 +1,6 @@
 package com.aliferous.mujtheatrebooking;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -10,7 +11,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -21,7 +28,9 @@ public class ShowTicketActivity extends AppCompatActivity {
 
     TextView tvBack, tvBID, tvName, tvEmail, tvDateTime;
     ImageView imQR;
-    String myText;
+    String myText, name, email, reg, date, time;
+
+    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +40,6 @@ public class ShowTicketActivity extends AppCompatActivity {
 
         Intent mIntent = getIntent();
         int BookingID = mIntent.getIntExtra("BookingID",0);
-        String name = mIntent.getStringExtra("Name");
-        String email = mIntent.getStringExtra("Email");
-        String reg = mIntent.getStringExtra("Reg");
-        String Date = mIntent.getStringExtra("Date");
-        String Time = mIntent.getStringExtra("Time");
 
 
         tvBack = findViewById(R.id.tvBack);
@@ -45,11 +49,37 @@ public class ShowTicketActivity extends AppCompatActivity {
         tvDateTime = findViewById(R.id.tvDatetime);
         imQR = findViewById(R.id.imageView5);
 
+        myRef.child("Bookings").child(""+BookingID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    name = dataSnapshot.child("Name").getValue(String.class);
+                    email = dataSnapshot.child("Email").getValue(String.class);
+                    reg = dataSnapshot.child("Registration No").getValue(String.class);
+                    date = dataSnapshot.child("Email").getValue(String.class);
+                    time = dataSnapshot.child("Email").getValue(String.class);
+
+                    // Display the retrieved Name and Email in the TextViews
+                    tvBID.setText("Booking ID : "+BookingID);
+                    tvName.setText(name);
+                    tvEmail.setText(email);
+                    tvDateTime.setText(date +"   "+ time);
+                } else {
+                    Toast.makeText(ShowTicketActivity.this, "Error, Please Contact Support Team", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         tvBID.setText("Booking ID : "+BookingID);
         tvName.setText(name);
         tvEmail.setText(email);
-        tvDateTime.setText(Date +"   "+ Time);
+        tvDateTime.setText(date +"   "+ time);
 
         myText = ""+BookingID;
 

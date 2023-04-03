@@ -127,13 +127,9 @@ public class LoginActivity extends AppCompatActivity {
                     bookingref.child(firebaseUser.getUid()).child("Bookings").child(""+BookingID).child("Id").setValue(""+BookingID);
 
 
+                    //On Complete, Intent
                     Intent intent = new Intent(LoginActivity.this, ShowTicketActivity.class);
                     intent.putExtra("BookingID", BookingID);
-                    intent.putExtra("Name", name);
-                    intent.putExtra("Email", email);
-                    intent.putExtra("Reg", reg);
-                    intent.putExtra("Date",Date);
-                    intent.putExtra("Time",Time);
                     startActivity(intent);
                 }
             }
