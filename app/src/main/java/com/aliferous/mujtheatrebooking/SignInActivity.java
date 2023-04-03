@@ -56,12 +56,30 @@ public class SignInActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser != null){
-            Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            FirebaseDatabase.getInstance().getReference().child("Admins").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChild(uid)) {
+                        // Admin
+                        Intent intent = new Intent(SignInActivity.this,AdminMainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    } else {
+                        // Not Admin
+                        Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(SignInActivity.this, "Error, Please contact support team", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-
-
     }
 
     @Override
