@@ -67,27 +67,11 @@ public class ChooseSessionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //reduce one seat
-                myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-
-                        int seats = Integer.parseInt(snapshot.child(z).getValue().toString());
-                        seats--;
-                        myRef.child("SeatAvailable").child(z).setValue("" + seats);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
                 String Date = tvDate.getText().toString();
                 Intent intent = new Intent(ChooseSessionActivity.this, LoginActivity.class);
                 intent.putExtra("Date", Date);
                 intent.putExtra("Time", Time);
+                intent.putExtra("z", z);
                 startActivity(intent);
             }
         });

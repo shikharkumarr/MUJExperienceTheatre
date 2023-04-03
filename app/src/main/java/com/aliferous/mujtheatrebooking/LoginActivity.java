@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseReference myRef = database.getReference() , bookingref = FirebaseDatabase.getInstance().getReference("Users");
 
     FirebaseUser firebaseUser;
-    String name, email, reg, Date, Time;
+    String name, email, reg, Date, Time, z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent mIntent = getIntent();
         Date = mIntent.getStringExtra("Date");
         Time = mIntent.getStringExtra("Time");
+        z = mIntent.getStringExtra("z");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 else {
 
+                  reduceSeat();
                   createOnFirebase();
 
                 }
@@ -79,6 +81,24 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void reduceSeat() {
+        //reduce one seat
+        myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                int seats = Integer.parseInt(snapshot.child(z).getValue().toString());
+                seats--;
+                myRef.child("SeatAvailable").child(z).setValue("" + seats);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
