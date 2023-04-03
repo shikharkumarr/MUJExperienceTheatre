@@ -277,4 +277,10 @@ public class ChooseSessionActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ChooseSessionActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 }
