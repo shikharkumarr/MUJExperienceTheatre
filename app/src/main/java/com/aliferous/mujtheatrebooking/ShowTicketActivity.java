@@ -69,9 +69,15 @@ public class ShowTicketActivity extends AppCompatActivity {
         tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ShowTicketActivity.this, LoginActivity.class);
+                Intent intent = new Intent(ShowTicketActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ShowTicketActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
