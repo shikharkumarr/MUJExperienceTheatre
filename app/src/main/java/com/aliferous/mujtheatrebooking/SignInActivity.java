@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class SignInActivity extends AppCompatActivity {
     Button button1, button2;
     TextView tvBack;
     EditText etPhno,etOTP;
+    ImageView ExperienceTheatre;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     String codeSent, codeEntered;
@@ -72,6 +74,17 @@ public class SignInActivity extends AppCompatActivity {
         tvBack = findViewById(R.id.tvBack);
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
+        ExperienceTheatre = findViewById(R.id.imageView7);
+
+
+        ExperienceTheatre.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(SignInActivity.this,AdminLoginActivity.class);
+                startActivity(intent);
+                return false;
+            }
+        });
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
