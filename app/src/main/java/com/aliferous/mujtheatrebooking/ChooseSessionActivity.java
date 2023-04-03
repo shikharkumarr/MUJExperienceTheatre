@@ -146,7 +146,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
 
 
-// Compare the dates
+                                // Compare the dates
                                 if (x.equals(y)) {
                                     int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
                                     boolean test = checktimings(currentHour,10);

@@ -78,6 +78,7 @@ public class ShowTicketActivity extends AppCompatActivity {
         tvBID.setText("Booking ID : "+BookingID);
         tvName.setText(name);
         tvEmail.setText(email);
+        tvReg.setText(reg);
         tvDateTime.setText(date +"   "+ time);
 
         myText = ""+BookingID;
