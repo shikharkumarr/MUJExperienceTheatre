@@ -26,7 +26,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class ShowTicketActivity extends AppCompatActivity {
 
-    TextView tvBack, tvBID, tvName, tvEmail, tvDateTime;
+    TextView tvBack, tvBID, tvName, tvEmail, tvDateTime, tvReg;
     ImageView imQR;
     String myText, name, email, reg, date, time;
 
@@ -37,16 +37,15 @@ public class ShowTicketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_ticket);
 
-
         Intent mIntent = getIntent();
         int BookingID = mIntent.getIntExtra("BookingID",0);
-
 
         tvBack = findViewById(R.id.tvBack);
         tvBID = findViewById(R.id.tvBID);
         tvName = findViewById(R.id.tvName);
         tvEmail = findViewById(R.id.tvEmail);
         tvDateTime = findViewById(R.id.tvDatetime);
+        tvReg = findViewById(R.id.tvId);
         imQR = findViewById(R.id.imageView5);
 
         myRef.child("Bookings").child(""+BookingID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -56,13 +55,14 @@ public class ShowTicketActivity extends AppCompatActivity {
                     name = dataSnapshot.child("Name").getValue(String.class);
                     email = dataSnapshot.child("Email").getValue(String.class);
                     reg = dataSnapshot.child("Registration No").getValue(String.class);
-                    date = dataSnapshot.child("Email").getValue(String.class);
-                    time = dataSnapshot.child("Email").getValue(String.class);
+                    date = dataSnapshot.child("Date").getValue(String.class);
+                    time = dataSnapshot.child("Time").getValue(String.class);
 
                     // Display the retrieved Name and Email in the TextViews
                     tvBID.setText("Booking ID : "+BookingID);
                     tvName.setText(name);
                     tvEmail.setText(email);
+                    tvReg.setText(reg);
                     tvDateTime.setText(date +"   "+ time);
                 } else {
                     Toast.makeText(ShowTicketActivity.this, "Error, Please Contact Support Team", Toast.LENGTH_SHORT).show();
@@ -74,7 +74,6 @@ public class ShowTicketActivity extends AppCompatActivity {
 
             }
         });
-
 
         tvBID.setText("Booking ID : "+BookingID);
         tvName.setText(name);
