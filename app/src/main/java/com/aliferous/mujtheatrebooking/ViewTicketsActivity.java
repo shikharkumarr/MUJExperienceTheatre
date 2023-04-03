@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -37,6 +38,7 @@ public class ViewTicketsActivity extends AppCompatActivity {
 
     Ticket_Adapter ticket_adapter;
 
+    TextView back;
     private TextView loading;
     String load = "Loading";
 
@@ -53,13 +55,30 @@ public class ViewTicketsActivity extends AppCompatActivity {
         recyclerView_tickets = findViewById(R.id.ticket_recycler);
         loading = findViewById(R.id.tvLoading);
 
+
+        back = findViewById(R.id.tvBack);
+
         tickets = new ArrayList<>();
         bookingIds = new ArrayList<>();
         recyclerView_tickets.setHasFixedSize(true);
         recyclerView_tickets.setLayoutManager(new LinearLayoutManager(ViewTicketsActivity.this));
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewTicketsActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         read_ticket_items();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ViewTicketsActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void read_ticket_items() {
@@ -102,7 +121,6 @@ public class ViewTicketsActivity extends AppCompatActivity {
                             user.setDate(snapshot.child("Date").getValue().toString());
                             user.setTime(snapshot.child("Time").getValue().toString());
 
-                            Toast.makeText(ViewTicketsActivity.this, ""+ snapshot.child("Id").getValue().toString(), Toast.LENGTH_SHORT).show();
 
                             tickets.add(user);
 
@@ -149,6 +167,7 @@ public class ViewTicketsActivity extends AppCompatActivity {
 
             }
         });
+
 
 
         /*reference.addValueEventListener(new ValueEventListener() {
