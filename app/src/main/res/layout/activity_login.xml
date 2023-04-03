@@ -79,7 +79,6 @@
         android:hint="Enter your registration number"
         android:background="@drawable/etbg"
         android:textColor="@color/white"
-        android:inputType="number"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         android:textSize="15dp"
