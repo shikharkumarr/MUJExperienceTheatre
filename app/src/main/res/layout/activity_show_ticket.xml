@@ -106,19 +106,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/centurygothic"
+            android:layout_marginTop="10dp"
             android:padding="20dp"
             android:text="Experience Theatre"
             android:textColor="@color/white"
             android:textSize="17dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
         <TextView
+            android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
-            android:text="Session Duration : 1 hr"
+            android:text="Session Duration : 15 mins"
             android:textColor="#6D6D80"
             android:textSize="14dp"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
@@ -157,7 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/centurygothic"
-            android:text="Date and Time"
+            android:text="Id"
             android:layout_marginTop="35dp"
             android:textColor="#6D6D80"
             android:textSize="17dp"
@@ -193,16 +194,29 @@
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         <TextView
-            android:id="@+id/tvDatetime"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvId"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:fontFamily="@font/centurygothic"
-            android:text="13 Feb 2023"
+            android:text="Registration Number"
             android:textColor="@color/white"
             android:textSize="17dp"
-            app:layout_constraintStart_toStartOf="@+id/tvEmail"
-            app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <TextView
+            android:id="@+id/tvDatetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/centurygothic"
+            android:paddingHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:text="13 Feb 2023"
+            android:textColor="#6D6D80"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <TextView
             android:layout_width="wrap_content"
