@@ -28,7 +28,7 @@ public class AdminMainActivity extends AppCompatActivity{
 
 
         scanButton = findViewById(R.id.scan_button);
-        resultTextView = findViewById(R.id.result_textview);
+        //resultTextView = findViewById(R.id.result_textview);
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class AdminMainActivity extends AppCompatActivity{
             if (result.getContents() == null) {
                 Toast.makeText(this, "Scan canceled", Toast.LENGTH_SHORT).show();
             } else {
-                resultTextView.setText("Ticket Id"+result.getContents());
+                //esultTextView.setText("Ticket Id"+result.getContents());
                 int BookingID = Integer.parseInt(result.getContents());
                 Intent intent = new Intent(AdminMainActivity.this, AdminViewTicketActivity.class);
                 intent.putExtra("BookingID", BookingID);

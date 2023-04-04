@@ -1,33 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#191926"
+tools:context=".AdminMainActivity">
+
+<ImageView
+    android:id="@+id/imageView3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#191926"
-    tools:context=".AdminMainActivity">
+    android:layout_height="400dp"
+    android:background="@drawable/loginbg"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/scan_button"
-            android:text="Scan QR Code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="32dp" />
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/exptheatre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-        <TextView
-            android:id="@+id/result_textview"
-            android:text="Scan result will be displayed here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/scan_button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="32dp" />
 
-    </RelativeLayout>
+<Button
+    android:id="@+id/scan_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Scan QR"
+    android:fontFamily="@font/centurygothic"
+    android:paddingBottom="35dp"
+    android:textSize="15dp"
+    android:visibility="visible"
+    android:textColor="@color/white"
+    app:backgroundTint="@null"
+    android:background="@drawable/btnbg"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
