@@ -51,6 +51,10 @@ public class AdminMainActivity extends AppCompatActivity{
                 Toast.makeText(this, "Scan canceled", Toast.LENGTH_SHORT).show();
             } else {
                 resultTextView.setText("Ticket Id"+result.getContents());
+                String BookingID = result.getContents();
+                Intent intent = new Intent(AdminMainActivity.this, AdminViewTicketActivity.class);
+                intent.putExtra("BookingID", BookingID);
+                startActivity(intent);
             }
         }
     }
