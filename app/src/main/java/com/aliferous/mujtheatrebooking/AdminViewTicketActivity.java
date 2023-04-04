@@ -88,6 +88,13 @@ public class AdminViewTicketActivity extends AppCompatActivity {
         tvReg.setText(reg);
         tvDateTime.setText(date +"   "+ time);
 
+        tvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
