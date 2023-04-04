@@ -131,6 +131,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.60" />
 
+
+
         <TextView
 
             android:id="@+id/item_datetime"
@@ -152,6 +154,22 @@
             app:backgroundTint="@null"
             android:background="@drawable/trash"
             app:layout_constraintVertical_bias="0.65"
+            app:layout_constraintHorizontal_bias="0.90"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+
+            android:id="@+id/item_open"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:fontFamily="@font/centurygothic"
+            android:textSize="11dp"
+            app:backgroundTint="@null"
+            android:background="@drawable/vector_open"
+            app:layout_constraintVertical_bias="0.15"
             app:layout_constraintHorizontal_bias="0.90"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

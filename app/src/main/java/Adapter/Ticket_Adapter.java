@@ -3,6 +3,7 @@ package Adapter;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aliferous.mujtheatrebooking.R;
+import com.aliferous.mujtheatrebooking.ShowTicketActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -72,6 +74,9 @@ public class Ticket_Adapter extends RecyclerView.Adapter<Ticket_Adapter.ViewHold
         holder.ticket_name.setText(ticket_item.getName());
         holder.ticket_datetime.setText(DateTime);
 
+        int id = Integer.parseInt(ticket_item.getId());
+
+
         holder.ticket_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +90,15 @@ public class Ticket_Adapter extends RecyclerView.Adapter<Ticket_Adapter.ViewHold
             public void onClick(View v) {
                 holder.ticket_layout_main.setVisibility(View.VISIBLE);
                 holder.ticket_layout_delete.setVisibility(View.GONE);
+            }
+        });
+
+        holder.ticket_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShowTicketActivity.class);
+                intent.putExtra("BookingID", id);
+                mContext.startActivity(intent);
             }
         });
 
@@ -128,7 +142,7 @@ public class Ticket_Adapter extends RecyclerView.Adapter<Ticket_Adapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView ticket_bookingid,ticket_name,ticket_datetime, ticket_deletetv;
-        public Button ticket_delete,ticket_yesdelete,ticket_nodelete;
+        public Button ticket_delete,ticket_yesdelete,ticket_nodelete,ticket_open;
 
         public ConstraintLayout ticket_layout_main, ticket_layout_delete;
 
@@ -143,6 +157,7 @@ public class Ticket_Adapter extends RecyclerView.Adapter<Ticket_Adapter.ViewHold
             ticket_deletetv = itemView.findViewById(R.id.item_tv_suredelete);
             ticket_nodelete = itemView.findViewById(R.id.item_tv_nodelete);
             ticket_yesdelete = itemView.findViewById(R.id.item_tv_yesdelete);
+            ticket_open = itemView.findViewById(R.id.item_open);
 
             ticket_layout_delete = itemView.findViewById(R.id.item_constraint_delete);
             ticket_layout_main = itemView.findViewById(R.id.item_constraint_main);
