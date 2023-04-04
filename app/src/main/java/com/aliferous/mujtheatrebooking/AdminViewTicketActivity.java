@@ -2,10 +2,13 @@ package com.aliferous.mujtheatrebooking;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,8 @@ public class AdminViewTicketActivity extends AppCompatActivity {
 
     TextView tvBack, tvName, tvEmail, tvDateTime, tvReg;
     String name, email, reg, date, time,bId;
+    Button button;
+    ConstraintLayout ticketExpLayout, TicketView;
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
     @SuppressLint("MissingInflatedId")
@@ -28,7 +33,7 @@ public class AdminViewTicketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_ticket);
 
-        
+
         Intent mIntent = getIntent();
         int BookingID = mIntent.getIntExtra("BookingID",0);
         bId = String.valueOf(BookingID);
@@ -39,6 +44,8 @@ public class AdminViewTicketActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmail);
         tvDateTime = findViewById(R.id.tvDatetime);
         tvReg = findViewById(R.id.tvId);
+        ticketExpLayout = findViewById(R.id.TicketExpiredView);
+        TicketView = findViewById(R.id.constraintLayout2);
 
         myRef.child("Bookings").child(""+BookingID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -49,6 +56,16 @@ public class AdminViewTicketActivity extends AppCompatActivity {
                     reg = dataSnapshot.child("Registration No").getValue(String.class);
                     date = dataSnapshot.child("Date").getValue(String.class);
                     time = dataSnapshot.child("Time").getValue(String.class);
+
+                    if (dataSnapshot.child("Valid").exists()){
+                        String valid = dataSnapshot.child("Valid").getValue(String.class);
+                        if (valid.equals("No")){
+                            button.setEnabled(false);
+                            button.setAlpha((float) 0.35);
+                            TicketView.setAlpha((float) 0.35);
+                            ticketExpLayout.setVisibility(View.VISIBLE);
+                        }
+                    }
 
                     // Display the retrieved Name and Email in the TextViews
                     tvName.setText(name);
@@ -70,5 +87,14 @@ public class AdminViewTicketActivity extends AppCompatActivity {
         tvEmail.setText(email);
         tvReg.setText(reg);
         tvDateTime.setText(date +"   "+ time);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myRef.child("Bookings").child(""+BookingID).child("Valid").setValue("No");
+                    button.setText("ADMITTED !");
+            }
+        });
     }
 }
