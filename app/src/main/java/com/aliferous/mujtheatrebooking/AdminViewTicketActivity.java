@@ -18,8 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AdminViewTicketActivity extends AppCompatActivity {
 
-    TextView tvBack, tvBID, tvName, tvEmail, tvDateTime, tvReg;
-    String name, email, reg, date, time;
+    TextView tvBack, tvName, tvEmail, tvDateTime, tvReg;
+    String name, email, reg, date, time,bId;
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
     @SuppressLint("MissingInflatedId")
@@ -31,9 +31,10 @@ public class AdminViewTicketActivity extends AppCompatActivity {
         
         Intent mIntent = getIntent();
         int BookingID = mIntent.getIntExtra("BookingID",0);
+        bId = String.valueOf(BookingID);
+        Toast.makeText(this, "Booking Id"+BookingID, Toast.LENGTH_SHORT).show();
 
         tvBack = findViewById(R.id.tvBack);
-        tvBID = findViewById(R.id.tvBID);
         tvName = findViewById(R.id.tvName);
         tvEmail = findViewById(R.id.tvEmail);
         tvDateTime = findViewById(R.id.tvDatetime);
@@ -50,7 +51,6 @@ public class AdminViewTicketActivity extends AppCompatActivity {
                     time = dataSnapshot.child("Time").getValue(String.class);
 
                     // Display the retrieved Name and Email in the TextViews
-                    tvBID.setText("Booking ID : "+BookingID);
                     tvName.setText(name);
                     tvEmail.setText(email);
                     tvReg.setText(reg);
@@ -66,7 +66,6 @@ public class AdminViewTicketActivity extends AppCompatActivity {
             }
         });
 
-        tvBID.setText("Booking ID : "+BookingID);
         tvName.setText(name);
         tvEmail.setText(email);
         tvReg.setText(reg);
