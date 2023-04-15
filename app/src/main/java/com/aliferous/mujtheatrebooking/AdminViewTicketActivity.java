@@ -46,6 +46,7 @@ public class AdminViewTicketActivity extends AppCompatActivity {
         tvReg = findViewById(R.id.tvId);
         ticketExpLayout = findViewById(R.id.TicketExpiredView);
         TicketView = findViewById(R.id.constraintLayout2);
+        button = findViewById(R.id.btnAdmit);
 
         myRef.child("Bookings").child(""+BookingID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
