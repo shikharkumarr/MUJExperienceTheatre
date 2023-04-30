@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseUser firebaseUser;
     String name, email, reg, Date, Time, z;
+    int noOfSeats = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         Date = mIntent.getStringExtra("Date");
         Time = mIntent.getStringExtra("Time");
         z = mIntent.getStringExtra("z");
+        noOfSeats = mIntent.getIntExtra("noOfSeats",1);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,12 +65,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 else {
-
                   reduceSeat();
                   createOnFirebase();
-
                 }
-
             }
         });
 
@@ -90,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
 
                 int seats = Integer.parseInt(snapshot.child(z).getValue().toString());
-                seats--;
+                seats = seats - noOfSeats;
                 myRef.child("SeatAvailable").child(z).setValue(seats);
             }
 

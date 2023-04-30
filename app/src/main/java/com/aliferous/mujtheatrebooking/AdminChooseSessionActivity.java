@@ -96,6 +96,7 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
                 intent.putExtra("Date", Date);
                 intent.putExtra("Time", Time);
                 intent.putExtra("z", z);
+                intent.putExtra("noOfSeats", noOfSeats);
                 startActivity(intent);
             }
         });
@@ -252,17 +253,20 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
         myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                String noOfSeats;
+                int SeatCount;
                 if (snapshot.hasChild("" + z)) {
                     tvseats1.setText(snapshot.child(z).getValue().toString() + " of 15");
-                    noOfSeats = snapshot.child(z).getValue().toString();
+                    SeatCount = Integer.parseInt(snapshot.child(z).getValue().toString());
                 } else {
                     myRef.child("SeatAvailable").child(z).setValue(15);
                     tvseats1.setText("15 of 15");
-                    noOfSeats = "15";
+                    SeatCount = 15;
                 }
 
-                if (noOfSeats.equals("0")){
+                if (SeatCount == 0){
+                    DisableButton();
+                }
+                else if ((SeatCount - noOfSeats)<0){
                     DisableButton();
                 }
                 else{
