@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 int seats = Integer.parseInt(snapshot.child(z).getValue().toString());
                 seats--;
-                myRef.child("SeatAvailable").child(z).setValue("" + seats);
+                myRef.child("SeatAvailable").child(z).setValue(seats);
             }
 
             @Override

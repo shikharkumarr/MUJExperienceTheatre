@@ -18,7 +18,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class AdminMainActivity extends AppCompatActivity{
 
-    private Button scanButton;
+    private Button scanButton,showTickets;
     private TextView resultTextView;
 
     @Override
@@ -28,6 +28,7 @@ public class AdminMainActivity extends AppCompatActivity{
 
 
         scanButton = findViewById(R.id.scan_button);
+        showTickets = findViewById(R.id.view_ticket_button);
         //resultTextView = findViewById(R.id.result_textview);
 
         scanButton.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +38,14 @@ public class AdminMainActivity extends AppCompatActivity{
                 integrator.setOrientationLocked(false);
                 integrator.setPrompt("Scan a QR code");
                 integrator.initiateScan();
+            }
+        });
+
+        showTickets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminMainActivity.this,AdminShowTicketsActivity.class);
+                startActivity(intent);
             }
         });
     }

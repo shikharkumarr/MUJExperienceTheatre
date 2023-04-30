@@ -21,10 +21,27 @@ tools:context=".AdminMainActivity">
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/exptheatre"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+
+    <Button
+        android:id="@+id/view_ticket_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Tickets"
+        android:fontFamily="@font/centurygothic"
+        android:paddingBottom="35dp"
+        android:textSize="15dp"
+        android:visibility="visible"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        android:background="@drawable/btnbg"
+        app:layout_constraintBottom_toTopOf="@id/scan_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 <Button
