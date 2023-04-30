@@ -22,9 +22,27 @@ tools:context=".AdminMainActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/exptheatre"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintBottom_toTopOf="@id/book_ticket_button" />
+
+
+    <Button
+        android:id="@+id/book_ticket_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book Tickets"
+        android:fontFamily="@font/centurygothic"
+        android:paddingBottom="35dp"
+        android:textSize="15dp"
+        android:visibility="visible"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        android:background="@drawable/btnbg"
+        app:layout_constraintBottom_toTopOf="@id/view_ticket_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button

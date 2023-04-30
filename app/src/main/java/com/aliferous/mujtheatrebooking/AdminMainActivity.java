@@ -18,7 +18,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class AdminMainActivity extends AppCompatActivity{
 
-    private Button scanButton,showTickets;
+    private Button scanButton,showTickets, bookTickets;
     private TextView resultTextView;
 
     @Override
@@ -29,6 +29,7 @@ public class AdminMainActivity extends AppCompatActivity{
 
         scanButton = findViewById(R.id.scan_button);
         showTickets = findViewById(R.id.view_ticket_button);
+        bookTickets = findViewById(R.id.book_ticket_button);
         //resultTextView = findViewById(R.id.result_textview);
 
         scanButton.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +46,14 @@ public class AdminMainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminMainActivity.this,AdminShowTicketsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bookTickets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminMainActivity.this,AdminChooseSessionActivity.class);
                 startActivity(intent);
             }
         });

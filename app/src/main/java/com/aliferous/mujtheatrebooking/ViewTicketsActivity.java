@@ -56,6 +56,8 @@ public class ViewTicketsActivity extends AppCompatActivity {
         loading = findViewById(R.id.tvLoading);
 
 
+
+
         back = findViewById(R.id.tvBack);
 
         tickets = new ArrayList<>();

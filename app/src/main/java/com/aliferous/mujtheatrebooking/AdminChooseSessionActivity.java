@@ -40,6 +40,7 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
     int result = 0;
     String x, y , z;
     int noOfSeats = 1;
+    int SeatCount = 15;
     Date today, maxDate;
 
     @SuppressLint("MissingInflatedId")
@@ -73,6 +74,7 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
                 if (noOfSeats < 15){
                     noOfSeats++;
                     tvSeats2.setText(""+noOfSeats);
+                    checkSeatCount();
                 }
             }
         });
@@ -83,6 +85,7 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
                 if (noOfSeats > 1){
                     noOfSeats--;
                     tvSeats2.setText(""+noOfSeats);
+                    checkSeatCount();
                 }
             }
         });
@@ -156,7 +159,21 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                                tvDate.setText(day + " / " + (month + 1) + " / " + (year));
+                                if((month+1)<10 ) {
+                                    if(day<10)
+                                        tvDate.setText("0"+day + " / 0" + (month + 1) + " / " + (year));
+                                    else
+                                        tvDate.setText(day + " / 0" + (month + 1) + " / " + (year));
+                                }
+
+                                else {
+                                    if(day<10)
+                                        tvDate.setText("0"+day + " / " + (month + 1) + " / " + (year));
+                                    else
+                                        tvDate.setText(day + " / " + (month + 1) + " / " + (year));
+                                }
+
+
                                 Date = tvDate.getText().toString();
                                 x = "" + day + " " + (month + 1) + " " + year;
 
@@ -253,7 +270,6 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
         myRef.child("SeatAvailable").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                int SeatCount;
                 if (snapshot.hasChild("" + z)) {
                     tvseats1.setText(snapshot.child(z).getValue().toString() + " of 15");
                     SeatCount = Integer.parseInt(snapshot.child(z).getValue().toString());
@@ -280,6 +296,15 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void checkSeatCount(){
+        if ((SeatCount - noOfSeats)<0){
+            DisableButton();
+        }
+        else{
+            EnableButton();
+        }
     }
 
     private boolean checktimings(int time, int endtime) {

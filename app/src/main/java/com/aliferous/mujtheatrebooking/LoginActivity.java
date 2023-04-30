@@ -122,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                     myRef.child("Registration No").setValue(reg);
                     myRef.child("Date").setValue(Date);
                     myRef.child("Time").setValue(Time);
+                    myRef.child("Seats").setValue(noOfSeats);
 
                     bookingref.child(firebaseUser.getUid()).child("Bookings").child(""+BookingID).child("Id").setValue(""+BookingID);
 

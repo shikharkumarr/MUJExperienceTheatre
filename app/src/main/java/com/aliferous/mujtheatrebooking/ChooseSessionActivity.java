@@ -129,7 +129,20 @@ public class ChooseSessionActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                                tvDate.setText(day + " / " + (month + 1) + " / " + (year));
+                                if((month+1)<10 ) {
+                                    if(day<10)
+                                        tvDate.setText("0"+day + " / 0" + (month + 1) + " / " + (year));
+                                    else
+                                        tvDate.setText(day + " / 0" + (month + 1) + " / " + (year));
+                                }
+
+                                else {
+                                    if(day<10)
+                                        tvDate.setText("0"+day + " / " + (month + 1) + " / " + (year));
+                                    else
+                                        tvDate.setText(day + " / " + (month + 1) + " / " + (year));
+                                }
+
                                 Date = tvDate.getText().toString();
                                 x = "" + day + " " + (month + 1) + " " + year;
 

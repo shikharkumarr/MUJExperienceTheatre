@@ -93,7 +93,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/choosetimeLayout"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +198,7 @@
         android:id="@+id/seatsavailableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choosetimeLayout">
 
@@ -245,7 +245,7 @@
         android:id="@+id/noOfSeatsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/seatsavailableLayout"
         app:layout_constraintTop_toTopOf="@+id/seatsavailableLayout">
 
