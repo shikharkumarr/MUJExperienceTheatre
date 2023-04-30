@@ -3,6 +3,7 @@ package com.aliferous.mujtheatrebooking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,12 +27,15 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class ShowTicketActivity extends AppCompatActivity {
 
-    TextView tvBack, tvBID, tvName, tvEmail, tvDateTime, tvReg;
+    TextView tvBack, tvBID, tvName, tvEmail, tvDateTime, tvReg, tvSeats;
     ImageView imQR;
     String myText, name, email, reg, date, time;
 
+    int seats=1;
+
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,7 @@ public class ShowTicketActivity extends AppCompatActivity {
         tvDateTime = findViewById(R.id.tvDatetime);
         tvReg = findViewById(R.id.tvId);
         imQR = findViewById(R.id.imageView5);
+        tvSeats = findViewById(R.id.tvSeats);
 
         myRef.child("Bookings").child(""+BookingID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -57,12 +62,15 @@ public class ShowTicketActivity extends AppCompatActivity {
                     reg = dataSnapshot.child("Registration No").getValue(String.class);
                     date = dataSnapshot.child("Date").getValue(String.class);
                     time = dataSnapshot.child("Time").getValue(String.class);
+                    if(dataSnapshot.child("Seats").exists())
+                        seats = Integer.parseInt(dataSnapshot.child("Seats").getValue().toString());
 
                     // Display the retrieved Name and Email in the TextViews
                     tvBID.setText("Booking ID : "+BookingID);
                     tvName.setText(name);
                     tvEmail.setText(email);
                     tvReg.setText(reg);
+                    tvSeats.setText("No. of Seats : " + seats);
                     tvDateTime.setText(date +"   "+ time);
                 } else {
                     Toast.makeText(ShowTicketActivity.this, "Error, Please Contact Support Team", Toast.LENGTH_SHORT).show();
