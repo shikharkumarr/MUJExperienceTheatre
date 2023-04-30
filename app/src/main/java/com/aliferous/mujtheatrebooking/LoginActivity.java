@@ -48,13 +48,11 @@ public class LoginActivity extends AppCompatActivity {
                         // Admin
                         usertype = "admin";
                         bookingref = FirebaseDatabase.getInstance().getReference("Admins");
-                        finish();
 
                     } else {
                         // Not Admin
                         usertype = "user";
                         bookingref = FirebaseDatabase.getInstance().getReference("Users");
-                        finish();
                     }
                 }
 
@@ -69,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 

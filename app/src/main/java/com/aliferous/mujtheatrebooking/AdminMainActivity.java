@@ -36,7 +36,6 @@ public class AdminMainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(AdminMainActivity.this);
-                integrator.setOrientationLocked(false);
                 integrator.setPrompt("Scan a QR code");
                 integrator.initiateScan();
             }

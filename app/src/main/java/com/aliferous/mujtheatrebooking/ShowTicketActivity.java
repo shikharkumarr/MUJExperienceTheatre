@@ -57,12 +57,10 @@ public class ShowTicketActivity extends AppCompatActivity {
                     if (dataSnapshot.hasChild(uid)) {
                         // Admin
                         usertype = "admin";
-                        finish();
 
                     } else {
                         // Not Admin
                         usertype = "user";
-                        finish();
                     }
                 }
 
