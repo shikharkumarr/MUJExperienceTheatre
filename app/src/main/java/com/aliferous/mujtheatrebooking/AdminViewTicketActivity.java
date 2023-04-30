@@ -21,9 +21,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AdminViewTicketActivity extends AppCompatActivity {
 
-    TextView tvBack, tvName, tvEmail, tvDateTime, tvReg;
+    TextView tvBack, tvName, tvEmail, tvDateTime, tvReg, tvSeats;
     String name, email, reg, date, time,bId;
     Button button;
+
+    int seats=1;
     ConstraintLayout ticketExpLayout, TicketView;
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
@@ -47,6 +49,8 @@ public class AdminViewTicketActivity extends AppCompatActivity {
         ticketExpLayout = findViewById(R.id.TicketExpiredView);
         TicketView = findViewById(R.id.constraintLayout2);
         button = findViewById(R.id.btnAdmit);
+        tvSeats = findViewById(R.id.tvSeats);
+
 
         myRef.child("Bookings").child(""+BookingID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -57,6 +61,9 @@ public class AdminViewTicketActivity extends AppCompatActivity {
                     reg = dataSnapshot.child("Registration No").getValue(String.class);
                     date = dataSnapshot.child("Date").getValue(String.class);
                     time = dataSnapshot.child("Time").getValue(String.class);
+                    if(dataSnapshot.child("Seats").exists())
+                        seats = Integer.parseInt(dataSnapshot.child("Seats").getValue().toString());
+
 
                     if (dataSnapshot.child("Valid").exists()){
                         String valid = dataSnapshot.child("Valid").getValue(String.class);
@@ -72,6 +79,7 @@ public class AdminViewTicketActivity extends AppCompatActivity {
                     tvName.setText(name);
                     tvEmail.setText(email);
                     tvReg.setText(reg);
+                    tvSeats.setText("No. of Seats : " + seats);
                     tvDateTime.setText(date +"   "+ time);
                 } else {
                     Toast.makeText(AdminViewTicketActivity.this, "Error, Please Contact Support Team", Toast.LENGTH_SHORT).show();
@@ -87,6 +95,7 @@ public class AdminViewTicketActivity extends AppCompatActivity {
         tvName.setText(name);
         tvEmail.setText(email);
         tvReg.setText(reg);
+        tvSeats.setText("No. of Seats : " + seats);
         tvDateTime.setText(date +"   "+ time);
 
         tvBack.setOnClickListener(new View.OnClickListener() {

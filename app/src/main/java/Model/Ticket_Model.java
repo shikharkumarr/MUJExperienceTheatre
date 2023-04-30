@@ -2,14 +2,13 @@ package Model;
 
 public class Ticket_Model {
 
-    private String Id,Name,Date,Time,Seats;
+    private String Id,Name,Date,Time;
 
-    public Ticket_Model(String Id, String Name, String Date, String Time, String Seats){
+    public Ticket_Model(String Id, String Name, String Date, String Time){
         this.Id = Id;
         this.Name = Name;
         this.Date = Date;
         this.Time = Time;
-        this.Seats = Seats;
 
     }
 
@@ -47,11 +46,4 @@ public class Ticket_Model {
         Time = time;
     }
 
-    public String getSeats() {
-        return Seats;
-    }
-
-    public void setSeats(String seats) {
-        Seats = seats;
-    }
 }

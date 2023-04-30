@@ -27,12 +27,44 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvBack;
     EditText etName, etEmail, etReg;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference() , bookingref = FirebaseDatabase.getInstance().getReference("Users");
 
     FirebaseUser firebaseUser;
-    String name, email, reg, Date, Time, z;
+    String name, email, reg, Date, Time, z, usertype;
     int noOfSeats = 1;
 
+    DatabaseReference myRef = database.getReference() , bookingref;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (firebaseUser != null){
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            FirebaseDatabase.getInstance().getReference().child("Admins").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.hasChild(uid)) {
+                        // Admin
+                        usertype = "admin";
+                        bookingref = FirebaseDatabase.getInstance().getReference("Admins");
+                        finish();
+
+                    } else {
+                        // Not Admin
+                        usertype = "user";
+                        bookingref = FirebaseDatabase.getInstance().getReference("Users");
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
