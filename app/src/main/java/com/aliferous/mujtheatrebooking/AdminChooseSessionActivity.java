@@ -309,18 +309,11 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
 
     private boolean checktimings(int time, int endtime) {
 
-
         if(time<endtime) {
             return true;
         } else {
             return false;
         }
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(AdminChooseSessionActivity.this, MainActivity.class);
-        startActivity(intent);
     }
 }
