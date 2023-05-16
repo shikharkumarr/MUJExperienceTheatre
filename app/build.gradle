@@ -11,8 +11,8 @@ android {
         applicationId "com.aliferous.mujtheatrebooking"
         minSdk 26
         targetSdk 33
-        versionCode 5
-        versionName "5.0"
+        versionCode 8
+        versionName "8.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -194,15 +194,17 @@ public class AdminChooseSessionActivity extends AppCompatActivity {
                                 // Compare the dates
                                 if (x.equals(y)) {
                                     int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-                                    boolean test = checktimings(currentHour,10);
-                                    if (!test){
-                                        Toast.makeText(AdminChooseSessionActivity.this, "1st time", Toast.LENGTH_SHORT).show();
+                                    int currentmins = calendar.get(Calendar.MINUTE);
+                                    boolean testhr = checktimings(currentHour,10);
+                                    boolean testmin = checktimings(currentmins,50);
+                                    if (!testhr && testmin){
                                         tvTime1.setVisibility(View.GONE);
                                         imTime1.setVisibility(View.GONE);
                                     }
 
-                                    test = checktimings(currentHour,14);
-                                    if (!test){
+                                    testhr = checktimings(currentHour,14);
+                                    testmin = checktimings(currentmins,50);
+                                    if (!testhr && testmin){
                                         tvTime2.setVisibility(View.GONE);
                                         imTime2.setVisibility(View.GONE);
                                         noshow.setVisibility(View.VISIBLE);
