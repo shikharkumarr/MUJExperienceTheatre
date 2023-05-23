@@ -128,6 +128,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/timebg"
             android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
             android:alpha="0.35"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -140,6 +141,26 @@
             android:layout_marginTop="20dp"
             android:alpha="0.35"
             app:layout_constraintStart_toEndOf="@id/imtime1"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <ImageView
+            android:id="@+id/imtime3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:alpha="0.35"
+            android:background="@drawable/timebg"
+            app:layout_constraintStart_toEndOf="@id/imtime2"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <ImageView
+            android:id="@+id/imtime4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/timebg"
+            android:layout_marginTop="20dp"
+            android:alpha="0.35"
+            app:layout_constraintStart_toEndOf="@id/imtime3"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         <TextView
@@ -162,14 +183,13 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:fontFamily="@font/centurygothic"
-            android:text="11:00 - 11:15 AM"
+            android:text="10 AM"
             android:alpha="0.35"
-            app:layout_constraintVertical_bias="0.10"
             android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/imtime1"
             app:layout_constraintEnd_toEndOf="@+id/imtime1"
-            app:layout_constraintStart_toStartOf="@+id/imtime1"
-            app:layout_constraintTop_toTopOf="@+id/imtime1" />
+            app:layout_constraintStart_toStartOf="@+id/imtime1" />
 
         <TextView
             android:id="@+id/tvtime2"
@@ -177,14 +197,44 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/centurygothic"
             android:padding="10dp"
-            android:text="03:00 - 03:15 PM"
+            android:text="12 Noon"
             android:alpha="0.35"
             app:layout_constraintVertical_bias="0.10"
             android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/imtime2"
             app:layout_constraintEnd_toEndOf="@+id/imtime2"
-            app:layout_constraintStart_toStartOf="@+id/imtime2"
-            app:layout_constraintTop_toTopOf="@+id/imtime2" />
+            app:layout_constraintStart_toStartOf="@+id/imtime2" />
+
+        <TextView
+            android:id="@+id/tvtime3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:fontFamily="@font/centurygothic"
+            android:text="2 PM"
+            android:alpha="0.35"
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imtime3"
+            app:layout_constraintEnd_toEndOf="@+id/imtime3"
+            app:layout_constraintStart_toStartOf="@+id/imtime3" />
+
+        <TextView
+            android:id="@+id/tvtime4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/centurygothic"
+            android:padding="10dp"
+            android:text="4 PM"
+            android:alpha="0.35"
+            app:layout_constraintVertical_bias="0.10"
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imtime4"
+            app:layout_constraintEnd_toEndOf="@+id/imtime4"
+            app:layout_constraintStart_toStartOf="@+id/imtime4" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -221,7 +271,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/timebg"
+            android:background="@drawable/seatavbg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -268,7 +318,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/timebg"
+            android:background="@drawable/seatavbg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
