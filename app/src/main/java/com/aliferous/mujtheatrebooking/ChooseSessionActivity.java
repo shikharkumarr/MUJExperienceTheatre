@@ -30,9 +30,9 @@ import java.util.TimeZone;
 
 public class ChooseSessionActivity extends AppCompatActivity {
 
-    TextView tvTime1, tvTime2, tvBack, tvDate, tvseats1, noshow;
+    TextView tvTime1, tvTime2, tvTime3, tvTime4, tvBack, tvDate, tvseats1, noshow;
     ConstraintLayout seatsavailableLayout, choosetimeLayout;
-    ImageView imTime1, imTime2;
+    ImageView imTime1, imTime2, imTime3, imTime4;
     Button button;
     String Date, Time;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -49,9 +49,13 @@ public class ChooseSessionActivity extends AppCompatActivity {
 
         tvTime1 = findViewById(R.id.tvtime1);
         tvTime2 = findViewById(R.id.tvtime2);
+        tvTime3 = findViewById(R.id.tvtime3);
+        tvTime4 = findViewById(R.id.tvtime4);
         noshow = findViewById(R.id.tvnoshow);
         imTime1 = findViewById(R.id.imtime1);
         imTime2 = findViewById(R.id.imtime2);
+        imTime3 = findViewById(R.id.imtime3);
+        imTime4 = findViewById(R.id.imtime4);
         tvseats1 = findViewById(R.id.tvseats1);
         tvBack = findViewById(R.id.tvBack);
         tvDate = findViewById(R.id.tvDate);
@@ -91,7 +95,7 @@ public class ChooseSessionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     setTimeAlpha1();
-                    Time = "11:00";
+                    Time = "10 AM";
                     y = "A";
                     seatsavailableLayout.setVisibility(View.VISIBLE);
                     tvseats1.setText("Loading...");
@@ -103,8 +107,32 @@ public class ChooseSessionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setTimeAlpha2();
-                Time = "03:00";
+                Time = "12 Noon";
                 y = "B";
+                seatsavailableLayout.setVisibility(View.VISIBLE);
+                tvseats1.setText("Loading...");
+                getSeats();
+            }
+        });
+
+        tvTime3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimeAlpha3();
+                Time = "2 PM";
+                y = "C";
+                seatsavailableLayout.setVisibility(View.VISIBLE);
+                tvseats1.setText("Loading...");
+                getSeats();
+            }
+        });
+
+        tvTime4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTimeAlpha4();
+                Time = "4 PM";
+                y = "D";
                 seatsavailableLayout.setVisibility(View.VISIBLE);
                 tvseats1.setText("Loading...");
                 getSeats();
@@ -215,6 +243,10 @@ public class ChooseSessionActivity extends AppCompatActivity {
         imTime1.setAlpha(0.35f);
         tvTime2.setAlpha(0.35f);
         imTime2.setAlpha(0.35f);
+        tvTime3.setAlpha(0.35f);
+        imTime3.setAlpha(0.35f);
+        tvTime4.setAlpha(0.35f);
+        imTime4.setAlpha(0.35f);
         y = null;
     }
 
@@ -223,6 +255,10 @@ public class ChooseSessionActivity extends AppCompatActivity {
         imTime1.setAlpha(1.0f);
         tvTime2.setAlpha(0.35f);
         imTime2.setAlpha(0.35f);
+        tvTime3.setAlpha(0.35f);
+        imTime3.setAlpha(0.35f);
+        tvTime4.setAlpha(0.35f);
+        imTime4.setAlpha(0.35f);
     }
 
     public void setTimeAlpha2() {
@@ -230,6 +266,32 @@ public class ChooseSessionActivity extends AppCompatActivity {
         imTime2.setAlpha(1.0f);
         tvTime1.setAlpha(0.35f);
         imTime1.setAlpha(0.35f);
+        tvTime3.setAlpha(0.35f);
+        imTime3.setAlpha(0.35f);
+        tvTime4.setAlpha(0.35f);
+        imTime4.setAlpha(0.35f);
+    }
+
+    public void setTimeAlpha3() {
+        tvTime3.setAlpha(1.0f);
+        imTime3.setAlpha(1.0f);
+        tvTime1.setAlpha(0.35f);
+        imTime1.setAlpha(0.35f);
+        tvTime2.setAlpha(0.35f);
+        imTime2.setAlpha(0.35f);
+        tvTime4.setAlpha(0.35f);
+        imTime4.setAlpha(0.35f);
+    }
+
+    public void setTimeAlpha4() {
+        tvTime4.setAlpha(1.0f);
+        imTime4.setAlpha(1.0f);
+        tvTime1.setAlpha(0.35f);
+        imTime1.setAlpha(0.35f);
+        tvTime2.setAlpha(0.35f);
+        imTime2.setAlpha(0.35f);
+        tvTime3.setAlpha(0.35f);
+        imTime3.setAlpha(0.35f);
     }
 
 
