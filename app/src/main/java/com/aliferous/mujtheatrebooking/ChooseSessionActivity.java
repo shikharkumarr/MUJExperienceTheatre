@@ -190,26 +190,71 @@ public class ChooseSessionActivity extends AppCompatActivity {
                                 // Compare the dates
                                 if (x.equals(y)) {
                                     int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-                                    boolean test = checktimings(currentHour,10);
-                                    if (!test){
-                                        Toast.makeText(ChooseSessionActivity.this, "1st time", Toast.LENGTH_SHORT).show();
+                                    int currentmins = calendar.get(Calendar.MINUTE);
+                                    boolean testhr = checktimings(currentHour,9);
+                                    boolean testmin = checktimings(currentmins,50);
+                                    if (!testhr && !testmin){
                                         tvTime1.setVisibility(View.GONE);
                                         imTime1.setVisibility(View.GONE);
                                     }
 
-                                    test = checktimings(currentHour,14);
-                                    if (!test){
+                                    testhr = checktimings(currentHour,10);
+                                    if (!testhr){
+                                        tvTime1.setVisibility(View.GONE);
+                                        imTime1.setVisibility(View.GONE);
+                                    }
+
+                                    testhr = checktimings(currentHour,11);
+                                    testmin = checktimings(currentmins,50);
+                                    if (!testhr && !testmin){
                                         tvTime2.setVisibility(View.GONE);
                                         imTime2.setVisibility(View.GONE);
-                                        noshow.setVisibility(View.VISIBLE);
-
                                     }
+
+                                    testhr = checktimings(currentHour,12);
+                                    if (!testhr){
+                                        tvTime2.setVisibility(View.GONE);
+                                        imTime2.setVisibility(View.GONE);
+                                    }
+
+                                    testhr = checktimings(currentHour,13);
+                                    testmin = checktimings(currentmins,50);
+                                    if (!testhr && !testmin){
+                                        tvTime3.setVisibility(View.GONE);
+                                        imTime3.setVisibility(View.GONE);
+                                    }
+
+                                    testhr = checktimings(currentHour,14);
+                                    if (!testhr){
+                                        tvTime3.setVisibility(View.GONE);
+                                        imTime3.setVisibility(View.GONE);
+                                    }
+
+                                    testhr = checktimings(currentHour,15);
+                                    testmin = checktimings(currentmins,50);
+                                    if (!testhr && !testmin){
+                                        tvTime4.setVisibility(View.GONE);
+                                        imTime4.setVisibility(View.GONE);
+                                        noshow.setVisibility(View.VISIBLE);
+                                    }
+
+                                    testhr = checktimings(currentHour,16);
+                                    if (!testhr){
+                                        tvTime4.setVisibility(View.GONE);
+                                        imTime4.setVisibility(View.GONE);
+                                        noshow.setVisibility(View.VISIBLE);
+                                    }
+
                                 }
                                 else{
                                     tvTime1.setVisibility(View.VISIBLE);
                                     imTime1.setVisibility(View.VISIBLE);
                                     tvTime2.setVisibility(View.VISIBLE);
                                     imTime2.setVisibility(View.VISIBLE);
+                                    tvTime3.setVisibility(View.VISIBLE);
+                                    imTime3.setVisibility(View.VISIBLE);
+                                    tvTime4.setVisibility(View.VISIBLE);
+                                    imTime4.setVisibility(View.VISIBLE);
                                     noshow.setVisibility(View.GONE);
                                 }
 
