@@ -235,12 +235,7 @@
             app:layout_constraintEnd_toEndOf="@+id/imtime4"
             app:layout_constraintStart_toStartOf="@+id/imtime4" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
 
 
